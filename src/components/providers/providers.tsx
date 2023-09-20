@@ -1,5 +1,4 @@
 import { MantineProvider, createTheme } from '@mantine/core';
-import { ModalsProvider } from '@mantine/modals';
 import { Notifications } from '@mantine/notifications';
 
 interface Props {
@@ -9,10 +8,8 @@ interface Props {
 export default function Providers(props: Props) {
     return (
         <MantineProvider defaultColorScheme="dark">
-            <ModalsProvider>
-                <Notifications />
-                {props.children}
-            </ModalsProvider>
+            <Notifications />
+            {props.children}
         </MantineProvider>
     );
 }

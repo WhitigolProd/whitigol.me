@@ -25,9 +25,7 @@ const menuItems = [
     },
 ];
 
-interface Props {
-    hidden?: boolean;
-}
+interface Props {}
 
 export default function Header(props: Props) {
     const { navOpen, setNavOpen } = useHeader();
@@ -36,7 +34,7 @@ export default function Header(props: Props) {
 
     return (
         <>
-            <div className="mx-2 flex h-full items-center justify-between" hidden={props.hidden || false}>
+            <div className="mx-2 flex h-full items-center justify-between">
                 <Link href="/">
                     <div className="flex items-center justify-center gap-1 pr-3 text-white">
                         <Image src={logo} alt="Whitigol" width={28}></Image>

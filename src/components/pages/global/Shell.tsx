@@ -29,7 +29,7 @@ export default function Shell(props: Props) {
             }}
         >
             <AppShell.Header>
-                <Header hidden={navOpen} />
+                <Header />
             </AppShell.Header>
             <AppShell.Main>{props.children}</AppShell.Main>
             <AppShell.Footer className="flex items-center justify-center gap-1">
