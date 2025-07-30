@@ -1,16 +1,15 @@
-import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/nav/footer";
+import { Navbar } from "@/components/nav/navbar";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
 	component: () => (
-		<>
-    <div className="fixed">
-
+		<div className="flex min-h-screen flex-col">
 			<Navbar withBorder />
-    </div>
-			<Outlet />
-			<TanStackRouterDevtools />
-		</>
+			<div className="grow">
+				<Outlet />
+			</div>
+			<Footer />
+		</div>
 	),
 });

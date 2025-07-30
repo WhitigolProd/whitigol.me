@@ -13,7 +13,7 @@ import React, { useState } from "react";
 // Enhanced navigation structure to support sub-items
 type NavigationItem = {
 	to?: LinkProps["to"];
-    href?: string;
+	href?: string;
 	label: string | React.ReactNode;
 	active?: boolean;
 	items?: NavigationItem[];
@@ -23,26 +23,26 @@ type NavigationItem = {
 // Navigation links with support for sub-items
 const navigationItems: NavigationItem[] = [
 	{ to: "/", label: "Home", active: true },
-    {
-        label: "Projects",
-        items: [
-            {
-                label: "SnailyCAD Manager",
-                href: "https://github.com/SnailyCAD/SnailyCAD-Manager",
-                description: "A manager for the SnailyCAD server",
-            },
-            {
-                label: (
-                    <div className="flex items-center gap-2">
-                        <span>View All</span>
-                        <ArrowRight className="h-4 w-4" />
-                    </div>
-                ),
-                description: "View all of my projects",
-                to: "/projects"
-            }
-        ]
-    }
+	{
+		label: "Projects",
+		items: [
+			{
+				label: "SnailyCAD Manager",
+				href: "https://github.com/SnailyCAD/SnailyCAD-Manager",
+				description: "A manager for the SnailyCAD server",
+			},
+			{
+				label: (
+					<div className="flex items-center gap-2">
+						<span>View All</span>
+						<ArrowRight className="h-4 w-4" />
+					</div>
+				),
+				description: "View all of my projects",
+				to: "/projects",
+			},
+		],
+	},
 ];
 
 interface NavbarProps {
@@ -94,15 +94,17 @@ function MobileNavItem({ item, onNavigate }: { item: NavigationItem; onNavigate:
 		);
 	}
 
-	return (
-        item.href ? (
-            <a href={item.href} className={cn(
-                "hover:text-primary block rounded-lg px-4 py-3 text-sm font-medium transition-colors",
-                item.active ? "text-primary" : "text-foreground hover:text-foreground",
-            )}>
-                {item.label}
-            </a>
-        ) : (
+	return item.href ? (
+		<a
+			href={item.href}
+			className={cn(
+				"hover:text-primary block rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+				item.active ? "text-primary" : "text-foreground hover:text-foreground",
+			)}
+		>
+			{item.label}
+		</a>
+	) : (
 		<Link
 			to={item.to!}
 			className={cn(
@@ -113,15 +115,14 @@ function MobileNavItem({ item, onNavigate }: { item: NavigationItem; onNavigate:
 		>
 			{item.label}
 		</Link>
-        )
-    );
+	);
 }
 
 export function Navbar(props: NavbarProps) {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
-		<header className={cn("bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full backdrop-blur", props.withBorder && "border-border border-b")}>
+		<header className={cn("bg-card/95 supports-[backdrop-filter]:bg-card/60 sticky top-0 z-50 w-full backdrop-blur", props.withBorder && "border-border border-b")}>
 			<div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
 				{/* Left side */}
 				<div className="flex items-center gap-2">
@@ -161,18 +162,16 @@ export function Navbar(props: NavbarProps) {
 
 					{/* Logo */}
 					<div className="flex items-center gap-8">
-						<Link to="/" className="text-primary-foreground transition-colors flex items-center gap-2">
+						<Link to="/" className="text-primary-foreground flex items-center gap-2 transition-colors">
 							<img src="/logo.svg" alt="Logo" className="h-10 w-10" />
-                            <span className="text-2xl font-bold">Whitigol's Portfolio</span>
+							<span className="text-2xl font-bold">Whitigol's Portfolio</span>
 						</Link>
 
 						{/* Desktop Navigation menu */}
 						<NavigationMenu className="max-md:hidden">
 							<NavigationMenuList className="gap-1">
 								{navigationItems.map((item, index) => (
-									<NavigationMenuItem
-										key={index}
-									>
+									<NavigationMenuItem key={index}>
 										{item.items && item.items.length > 0 ? (
 											<>
 												<NavigationMenuTrigger className="text-muted-foreground hover:text-primary data-[state=open]:text-primary h-9 bg-transparent! px-4 py-2 text-sm font-medium data-[state=open]:bg-transparent!">
@@ -181,7 +180,12 @@ export function Navbar(props: NavbarProps) {
 												<NavigationMenuContent>
 													<ul className="grid w-[500px] gap-2 p-4 md:w-[600px] md:grid-cols-2">
 														{item.items.map((subItem, subIndex) => (
-															<ListItem key={subIndex} title={subItem.label} description={subItem.description} href={subItem.to ?? subItem.href} />
+															<ListItem
+																key={subIndex}
+																title={subItem.label as string}
+																description={subItem.description}
+																href={subItem.to ?? subItem.href}
+															/>
 														))}
 													</ul>
 												</NavigationMenuContent>
