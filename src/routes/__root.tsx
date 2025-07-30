@@ -1,27 +1,15 @@
-import NotFoundPage from "@/components/pages/404/NotFound";
-import Layout from "@/components/pages/global/layout";
-import {
-	Outlet,
-	ScrollRestoration,
-	createRootRoute,
-} from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { Footer } from "@/components/nav/footer";
+import { Navbar } from "@/components/nav/navbar";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
 
 export const Route = createRootRoute({
-	component: Root,
-	notFoundComponent: NotFoundPage,
+	component: () => (
+		<div className="flex min-h-screen flex-col">
+			<Navbar withBorder />
+			<div className="grow">
+				<Outlet />
+			</div>
+			<Footer />
+		</div>
+	),
 });
-
-function Root() {
-	return (
-		<>
-			<Layout>
-				{process.env.NODE_ENV === "development" && <TanStackRouterDevtools />}
-				<div className="def z-0">
-					<Outlet />
-				</div>
-				<ScrollRestoration />
-			</Layout>
-		</>
-	);
-}
